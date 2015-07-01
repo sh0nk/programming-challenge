@@ -7,7 +7,7 @@ public class NoripiMeiroAnswer implements Meiro {
     private int goalX;
     private int goalY;
 
-	public int bfs(char meiro[][], int numX, int numY, int startX, int startY, int goalX, int goalY) {
+    public int bfs(char meiro[][], int numX, int numY, int startX, int startY, int goalX, int goalY) {
         this.meiro = this.addWall(meiro);
         this.startX = startX + 1;
         this.startY = startY + 1;
@@ -15,11 +15,11 @@ public class NoripiMeiroAnswer implements Meiro {
         this.goalY = goalY + 1;
 
         this.meiro[this.startX][this.startY] = 0;
-	    this.updateFromPoints(this.startX, this.startY);
+        this.updateFromPoints(this.startX, this.startY);
 
-		this.printMeiro();
+        this.printMeiro();
         return this.meiro[this.goalX][this.goalY];
-	}
+    }
 
     private void updateFromPoints(int x, int y) {
         int i = this.meiro[x][y];
@@ -45,7 +45,7 @@ public class NoripiMeiroAnswer implements Meiro {
             this.updateFromPoints(x, y+1);
         }
     }
-	
+    
     private int[][] addWall(char meiro[][]) {
         int[][] data; 
         data = new int[meiro.length+2][meiro[0].length+2];
@@ -63,33 +63,33 @@ public class NoripiMeiroAnswer implements Meiro {
         return data;
     }
 
-	private void printMeiro() {
-		for (int i=0; i<this.meiro.length; i++) {
-			for (int j=0; j<this.meiro[i].length; j++) {
-				String output = "";
-				switch (this.meiro[i][j]) {
-				case -1:
-					output = "xxx";
-					break;
+    private void printMeiro() {
+        for (int i=0; i<this.meiro.length; i++) {
+            for (int j=0; j<this.meiro[i].length; j++) {
+                String output = "";
+                switch (this.meiro[i][j]) {
+                case -1:
+                    output = "xxx";
+                    break;
                 default:
-					if (i==this.startX && j==this.startY) {
-						output = "  S";
-						break;
-					}
-					if (i==this.goalX && j==this.goalY) {
-						output = "  G";
-						break;
-					}
+                    if (i==this.startX && j==this.startY) {
+                        output = "  S";
+                        break;
+                    }
+                    if (i==this.goalX && j==this.goalY) {
+                        output = "  G";
+                        break;
+                    }
                     output = "   ";
 
                     if (this.meiro[i][j] > 0) {
                         output = String.format("%3d", this.meiro[i][j]);
                     }
-				}
-				System.out.print(output);
-			}
-			System.out.println();
-		}
-	    System.out.println();
-	}
+                }
+                System.out.print(output);
+            }
+            System.out.println();
+        }
+        System.out.println();
+    }
 }
