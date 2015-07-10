@@ -1,4 +1,4 @@
-maze: main.o knapsack.o
+knapsack: main.o knapsack.o
 	g++ -o knapsack main.cpp knapsack.cpp
 
 main.o: main.cpp
@@ -8,4 +8,4 @@ knapsack.o: knapsack.cpp
 	g++ -c knapsack.cpp
 
 clean:
-	rm -rf *.o *.gch maze
+	rm -rf *.o *.gch knapsack 
