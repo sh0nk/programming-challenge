@@ -1,5 +1,4 @@
-import java.util.Collections;
-import java.util.PriorityQueue;
+import java.util.*;
 
 public class AnswerSh0nk implements Interface {
     private int currentGas;
@@ -20,22 +19,21 @@ public class AnswerSh0nk implements Interface {
 
     @Override
     public int execute(int N, int L, int P, int[] A, int[] B) {
+        int[] extendedA = Arrays.copyOf(A, N + 1);
+        extendedA[N] = L;
+        int[] extendedB = Arrays.copyOf(B, N + 1);
+        extendedB[N] = 0;
+
         currentGas = P;
         heap = new PriorityQueue<>(N, Collections.reverseOrder());
 
-        for (int i = 0; i < N; i++) {
-            heap.add(B[i]);
-            while (currentGas < A[i]) {
+        for (int i = 0; i < N + 1; i++) {
+            while (currentGas < extendedA[i]) {
                 if (!fillGas(i)) {
                     return -1;
                 }
             }
-        }
-
-        while (currentGas < L) {
-            if (!fillGas(N)) {
-                return -1;
-            }
+            heap.add(extendedB[i]);
         }
 
         return count;
