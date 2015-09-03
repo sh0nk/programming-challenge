@@ -13,7 +13,7 @@ public class MainTest {
 
   @Before
   public void setUp() {
-    this.s = new Main();
+    this.s = new NoripiMain();
   }
 
   @Test
@@ -25,8 +25,8 @@ public class MainTest {
 
   @Test
   public void testSolve2() {
-    int result = this.s.solve(7, 3, new int[][] {});
-    assertEquals(result, 100000);
+    int result = this.s.solve(7, 7, new int[][] {});
+    assertEquals(result, 140000);
   }
 
 }
