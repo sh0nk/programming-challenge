@@ -2,7 +2,7 @@ import org.junit.Assert;
 
 public class Test {
 
-    private Interface yourImplementation = new Main();
+    private Interface yourImplementation = new Onishi();
 
     @org.junit.Test
     public void test1() {
