@@ -34,6 +34,12 @@ public class LatticeTest {
         LatticeSolverWrapper solver = new LatticeSolverWrapper(0, 0, 6486480, 4194304);
         timeMeasuredAssertEquals(15, solver);
     }
+    
+    @Test
+    public void latticeTest6() {
+        LatticeSolverWrapper solver = new LatticeSolverWrapper(6486480, 4194304, 6486480, 4194304);
+        timeMeasuredAssertEquals(0, solver);
+    }
 
     private void timeMeasuredAssertEquals(int expected, LatticeSolverWrapper solver) {
         long start = System.nanoTime();
