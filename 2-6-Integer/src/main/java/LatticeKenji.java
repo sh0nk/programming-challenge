@@ -14,6 +14,10 @@ public class LatticeKenji implements Lattice {
         int x = Math.abs(aX - bX);
         int y = Math.abs(aY - bY);
 
+        if (x == 0 && y == 0) {
+            return 0;
+        }
+
         return yu(Math.max(x, y), Math.min(x, y)) - 1;
     }
 
