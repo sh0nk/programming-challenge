@@ -5,6 +5,16 @@ public class NoripiLattice implements Lattice {
     int xdiff = Math.abs(aX - bX);
     int ydiff = Math.abs(aY - bY);
 
+    if (xdiff == 0 && ydiff == 0) {
+      return 0;
+    }
+    if (xdiff == 0) {
+      return ydiff - 1;
+    }
+    if (ydiff == 0) {
+      return xdiff - 1;
+    }
+
     int gcd = this.euclid(xdiff, ydiff);
     return gcd - 1;
   }
