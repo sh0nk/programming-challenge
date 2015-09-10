@@ -31,10 +31,9 @@ public class LatticeTest {
 
     @Test
     public void latticeTest5() {
-        LatticeSolverWrapper solver = new LatticeSolverWrapper(0, 0, 540573696, 2310144);
-        timeMeasuredAssertEquals(2310143, solver);
+        LatticeSolverWrapper solver = new LatticeSolverWrapper(0, 0, 6486480, 4194304);
+        timeMeasuredAssertEquals(15, solver);
     }
-
 
     private void timeMeasuredAssertEquals(int expected, LatticeSolverWrapper solver) {
         long start = System.nanoTime();
