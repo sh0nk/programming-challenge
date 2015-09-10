@@ -7,36 +7,56 @@ public class LatticeTest {
 
     @Test
     public void latticeTest1() {
-        timeMeasuredAssertEquals(3, yourImplementation.solve(1, 11, 5, 3));
+        LatticeSolverWrapper solver = new LatticeSolverWrapper(1, 11, 5, 3);
+        timeMeasuredAssertEquals(3, solver);
     }
 
     @Test
     public void latticeTest2() {
-        timeMeasuredAssertEquals(0, yourImplementation.solve(0, 0, 1, 3));
+        LatticeSolverWrapper solver = new LatticeSolverWrapper(0, 0, 1, 3);
+        timeMeasuredAssertEquals(0, solver);
     }
 
     @Test
     public void latticeTest3() {
-        timeMeasuredAssertEquals(998, yourImplementation.solve(3, 8, 3000, 8000));
+        LatticeSolverWrapper solver = new LatticeSolverWrapper(3, 8, 3000, 8000);
+        timeMeasuredAssertEquals(998, solver);
     }
 
     @Test
     public void latticeTest4() {
-        timeMeasuredAssertEquals(3, yourImplementation.solve(5, 3, -3, -1));
+        LatticeSolverWrapper solver = new LatticeSolverWrapper(5, 3, -3, -1);
+        timeMeasuredAssertEquals(3, solver);
     }
 
     @Test
     public void latticeTest5() {
-        timeMeasuredAssertEquals(2310143, yourImplementation.solve(0, 0, 540573696, 2310144));
+        LatticeSolverWrapper solver = new LatticeSolverWrapper(0, 0, 540573696, 2310144);
+        timeMeasuredAssertEquals(2310143, solver);
     }
 
 
-    private void timeMeasuredAssertEquals(int expected, int actual) {
+    private void timeMeasuredAssertEquals(int expected, LatticeSolverWrapper solver) {
         long start = System.nanoTime();
-        Assert.assertEquals(expected, actual);
+        Assert.assertEquals(expected, solver.solve());
         long end = System.nanoTime();
 
         System.out.println(String.format("Finished execution in: %f millis." , (end - start) / 1000000f ));
+    }
+
+    private class LatticeSolverWrapper {
+        int aX, aY, bX, bY;
+
+        LatticeSolverWrapper(int aX, int aY, int bX, int bY) {
+            this.aX = aX;
+            this.aY = aY;
+            this.bX = bX;
+            this.bY = bY;
+        }
+
+        int solve() {
+            return yourImplementation.solve(aX, aY, bX, bY);
+        }
     }
 
 }
