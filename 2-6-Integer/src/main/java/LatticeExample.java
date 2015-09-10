@@ -11,6 +11,10 @@ public class LatticeExample implements Lattice {
         int dx = Math.abs(aX - bX);
         int dy = Math.abs(aY - bY);
 
+        if (dx == 0 && dy == 0) {
+            return 0;
+        }
+
         return gcd(dx, dy) - 1;
     }
 }
