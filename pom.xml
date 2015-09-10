@@ -12,6 +12,8 @@
         <module>1-1-Meiro</module>
         <module>2-3-DP-knapsack-large-weight</module>
         <module>2-4-1-priority_queue</module>
+        <module>2-5-Graph</module>
+        <module>2-6-Integer</module>
     </modules>
 
     <dependencies>
