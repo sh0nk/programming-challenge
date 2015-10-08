@@ -21,6 +21,14 @@ public class MSPTest {
         timeMeasuredAssertEquals(6, solver);
     }
 
+    @Test
+    public void MSPTest3() {
+        int a1[] = {-2,2};
+        int a2[] = {2,2,};
+        MSPSolverWrapper solver = new MSPSolverWrapper(a1, a2);
+        timeMeasuredAssertEquals(0, solver);
+    }
+
     private void timeMeasuredAssertEquals(int expected, MSPSolverWrapper solver) {
         long start = System.nanoTime();
         Assert.assertEquals(expected, solver.solve());
