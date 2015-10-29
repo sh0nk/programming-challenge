@@ -9,11 +9,10 @@ public class NoripiCableMaster implements CableMaster {
     int count = K;
     double pivot = estimatedPartLength / 2;
 
-    int actualCount = 0;
     double answer = 0;
     while (pivot > 0.0005) {
       final double partLen = estimatedPartLength;
-      actualCount = (int) Arrays.stream(L).map(l -> (int) Math.floor(l / partLen)).sum();
+      int actualCount = (int) Arrays.stream(L).map(l -> (int) Math.floor(l / partLen)).sum();
 
       // exact number
       if (actualCount == count) {
@@ -34,10 +33,6 @@ public class NoripiCableMaster implements CableMaster {
       pivot = pivot / 2;
     }
 
-    int answerInt = (int) Math.floor(answer *= 100);
-    String answerStr = String.format("%d", answerInt);
-
-    return answerStr.substring(0, answerStr.length() - 2) + "."
-        + answerStr.substring(answerStr.length() - 2);
+    return String.format("%.2f", Math.floor(answer * 100) / 100);
   }
 }
