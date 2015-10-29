@@ -16,6 +16,7 @@
         <module>2-6-Integer</module>
         <module>2-7-GCJ-01</module>
         <module>2-7-GCJ-02</module>
+        <module>3-1-BinarySearch</module>
     </modules>
 
     <dependencies>
