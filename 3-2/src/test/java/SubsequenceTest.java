@@ -38,6 +38,19 @@ public class SubsequenceTest {
         timeMeasuredAssertEquals(3, solver);
     }
 
+    @Test
+    public void cableMasterTest3() {
+        int n = 99999;
+        int S = 854931;
+        int[] a = new int[n];
+        for (int i = 0; i < a.length; i++) {
+            a[i] = (i + 1) % 9999;
+        }
+
+        SubsequenceSolverWrapper solver = new SubsequenceSolverWrapper(n, S, a);
+        timeMeasuredAssertEquals(86, solver);
+    }
+
     private void timeMeasuredAssertEquals(Object expected, SubsequenceSolverWrapper solver) {
         long start = System.nanoTime();
         Assert.assertEquals(expected, solver.solve());
