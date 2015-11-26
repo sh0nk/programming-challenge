@@ -19,6 +19,8 @@
         <module>3-1-BinarySearch</module>
         <module>3-1-AggressiveCows</module>
         <module>3-2</module>
+        
+        <module>3-3-DataStructures</module>
     </modules>
 
     <dependencies>
