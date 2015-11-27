@@ -11,7 +11,14 @@ public class CraneTest {
   public void craneTest1() {
     CraneSolverWrapper solver =
         new CraneSolverWrapper(2, 1, new int[] {10, 5}, new int[] {1}, new int[] {90});
-    timeMeasuredAssertEquals(new double[] {5.0, 10.0}, solver);
+    timeMeasuredAssertEquals(new double[][] {{5.0, 10.0}}, solver);
+  }
+
+  @Test
+  public void craneTest2() {
+    CraneSolverWrapper solver =
+        new CraneSolverWrapper(3, 2, new int[] {5, 5, 5}, new int[] {1, 2}, new int[] {270, 90});
+    timeMeasuredAssertEquals(new double[][] {{-10.0, 5.0}, {-5.0, 10.0}}, solver);
   }
 
   private class CraneSolverWrapper {
@@ -29,14 +36,18 @@ public class CraneTest {
       this.A = A;
     }
 
-    double[] solve() {
+    double[][] solve() {
       return yourImplementation.solve(this.N, this.C, this.L, this.S, this.A);
     }
   }
 
-  private void timeMeasuredAssertEquals(double[] expected, CraneSolverWrapper solver) {
+  private void timeMeasuredAssertEquals(double[][] expected, CraneSolverWrapper solver) {
     long start = System.nanoTime();
-    Assert.assertArrayEquals(expected, solver.solve(), 0);
+
+    double[][] results = solver.solve();
+    for (int i = 0; i < expected.length; i++) {
+      Assert.assertArrayEquals(expected[i], results[i], 0);
+    }
     long end = System.nanoTime();
 
     System.out
