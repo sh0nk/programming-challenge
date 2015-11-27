@@ -5,7 +5,7 @@ import org.junit.Test;
 
 public class CraneTest {
   // replace by your implementation class here
-  private CraneInterface yourImplementation = new CraneExample();
+  private CraneInterface yourImplementation = new CraneSh0nk();
 
   @Test
   public void craneTest1() {
@@ -20,6 +20,13 @@ public class CraneTest {
         new CraneSolverWrapper(3, 2, new int[] {5, 5, 5}, new int[] {1, 2}, new int[] {270, 90});
     timeMeasuredAssertEquals(new double[][] {{-10.0, 5.0}, {-5.0, 10.0}}, solver);
   }
+
+    @Test
+    public void craneTest3() {
+        CraneSolverWrapper solver =
+                new CraneSolverWrapper(3, 3, new int[] {5, 5, 5}, new int[] {1, 2, 1}, new int[] {270, 90, 90});
+        timeMeasuredAssertEquals(new double[][] {{-10.0, 5.0}, {-5.0, 10.0}, {5.0, 0.0}}, solver);
+    }
 
   private class CraneSolverWrapper {
     private int N;
