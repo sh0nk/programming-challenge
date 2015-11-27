@@ -15,5 +15,5 @@ package main;
  *
  */
 public interface CraneInterface {
-  public double[] solve(int N, int C, int[] L, int[] S, int[] A);
+  public double[][] solve(int N, int C, int[] L, int[] S, int[] A);
 }
