@@ -2,6 +2,9 @@ package main;
 
 import java.util.Arrays;
 
+import noripi.Angle;
+import noripi.PolarPoint;
+
 public class NoripiCrane implements CraneInterface {
   @Override
   public double[][] solve(int N, int C, int[] L, int[] S, int[] A) {
@@ -13,27 +16,33 @@ public class NoripiCrane implements CraneInterface {
         break;
       }
     }
+    this.printTree(tree);
 
     /***********************************************************************************
      * execute operations
      ***********************************************************************************/
-    int i = 0;
-    int targetIndex = S[i];
-    double newAngleRadian = (A[i] - 180.0) / 180.0 * Math.PI;
+    double[][] results = new double[S.length][2];
 
-    // update tree
-    int index = targetIndex;
-    tree[0][index] =
-        new PolarPoint(tree[0][index].length, Math.cos(newAngleRadian), Math.sin(newAngleRadian));
-    for (int level = 1; level < rootLevel + 1; level++) {
-      index = (int) Math.floor(index / 2.0);
-      this.updateNode(tree, level, index);
+    for (int i = 0; i < S.length; i++) {
+      int targetIndex = S[i];
+      Angle newAngle = Angle.byRadians((A[i] - 180.0) / 180.0 * Math.PI);
+      Angle subtractedAngle = newAngle.getSubtractedAngle(tree[0][targetIndex].getAngle());
+      int index = targetIndex;
+
+      tree[0][index] = new PolarPoint(tree[0][index].getLength(), newAngle);
+
+      // update tree
+      for (int level = 1; level < rootLevel + 1; level++) {
+        index = (int) Math.floor(index / 2.0);
+        this.updateNode(tree, level, index, subtractedAngle);
+      }
+
+      this.printTree(tree);
+      results[i] = tree[rootLevel][0].toRectangular();
+      System.out.println(Arrays.toString(tree[rootLevel][0].toRectangular()));
     }
 
-    this.printTree(tree);
-    System.out.println(Arrays.toString(tree[rootLevel][0].toRectangular()));
-
-    return null;
+    return results;
   }
 
   private PolarPoint[][] setupInitialTree(int N, int[] L) {
@@ -48,10 +57,10 @@ public class NoripiCrane implements CraneInterface {
       for (int i = 0; i < length; i++) {
 
         if (level == 0) {
-          double angle = i == 0 ? 0.5 * Math.PI : 0;
-          tree[level][i] = new PolarPoint(L[i], Math.cos(angle), Math.sin(angle));
+          double rad = (i == 0) ? 0.5 * Math.PI : 0;
+          tree[level][i] = new PolarPoint(L[i], Angle.byRadians(rad));
         } else {
-          this.updateNode(tree, level, i);
+          this.updateNode(tree, level, i, Angle.byRadians(0));
         }
       }
 
@@ -62,55 +71,59 @@ public class NoripiCrane implements CraneInterface {
     return tree;
   }
 
-  private void updateNode(PolarPoint[][] tree, int level, int index) {
+  private void updateNode(PolarPoint[][] tree, int level, int index, Angle rotation) {
     int firstChildIndex = index * 2;
     int secondChildIndex = firstChildIndex + 1;
 
     if (tree[level - 1].length <= secondChildIndex
-        || tree[level - 1][firstChildIndex + 1].length == 0) {
+        || tree[level - 1][firstChildIndex + 1].getLength() == 0) {
 
-      tree[level][index] = new PolarPoint(tree[level - 1][firstChildIndex].length,
-          tree[level - 1][firstChildIndex].cosine, tree[level - 1][firstChildIndex].sine);
+      if (tree[level][index] == null) {
+        // if not set, set new value
+        tree[level][index] = new PolarPoint(tree[level - 1][firstChildIndex].getLength(),
+            tree[level - 1][firstChildIndex].getAngle());
+      } else {
+        System.out.println(rotation);
+        // if set, just rotate
+        Angle newAngle = tree[level][index].getAngle().getRotatedAngle(rotation);
+        tree[level][index] = new PolarPoint(tree[level - 1][firstChildIndex].getLength(), newAngle);
+      }
       return;
     }
 
     PolarPoint firstChild = tree[level - 1][firstChildIndex];
     PolarPoint secondChild = tree[level - 1][secondChildIndex];
 
-    // if sin=0, length is just sum
-    if (secondChild.sine == 0) {
-      tree[level][index] = new PolarPoint(firstChild.length + secondChild.length, firstChild.cosine,
-          firstChild.sine);
-      return;
-    }
-
     // cos formula: a^2 = b^2 + c^2 - 2bc * cosA
-    double segLength = Math.sqrt(Math.pow(firstChild.length, 2) + Math.pow(secondChild.length, 2)
-        - 2 * firstChild.length * secondChild.length * -secondChild.cosine);
+    double segLength = Math.sqrt(Math.pow(firstChild.getLength(), 2)
+        + Math.pow(secondChild.getLength(), 2) - 2 * firstChild.getLength()
+            * secondChild.getLength() * -secondChild.getAngle().getCosine());
 
     // sin formula: a/sinA = b/sinB = c/sinC
-    double firstChildDiffSin = secondChild.length / segLength * secondChild.sine;
-    double firstChildDiffCos = Math.sqrt(1 - Math.pow(firstChildDiffSin, 2)) * Math.signum(
-        Math.pow(firstChild.length, 2) + Math.pow(segLength, 2) - Math.pow(secondChild.length, 2));
+    double firstChildDiffSin =
+        secondChild.getLength() / segLength * secondChild.getAngle().getSine();
+    double firstChildDiffCos = Math.sqrt(1 - Math.pow(firstChildDiffSin, 2))
+        * Math.signum(Math.pow(firstChild.getLength(), 2) + Math.pow(segLength, 2)
+            - Math.pow(secondChild.getLength(), 2));
 
-    // seg angle = second angle - diff angle
-    double segCos = firstChild.cosine * firstChildDiffCos - firstChild.sine * firstChildDiffSin;
-    double segSin = firstChild.sine * firstChildDiffCos + firstChild.cosine * firstChildDiffSin;
-    tree[level][index] = new PolarPoint(segLength, segCos, segSin);
+    // seg angle = second angle + diff angle
+    Angle rotatedAngle =
+        firstChild.getAngle().getRotatedAngle(firstChildDiffCos, firstChildDiffSin);
+    tree[level][index] = new PolarPoint(segLength, rotatedAngle);
 
     // if next segment exists, update angle
     if (tree[level].length > index + 1 && tree[level][index + 1] != null) {
       PolarPoint nextSegment = tree[level][index + 1];
 
-      double nextSegDiffSin = firstChild.length * firstChildDiffSin / secondChild.length;
-      double nextSegDiffCos =
-          Math.sqrt(1 - Math.pow(nextSegDiffSin, 2)) * Math.signum(Math.pow(secondChild.length, 2)
-              + Math.pow(segLength, 2) - Math.pow(firstChild.length, 2));
+      double nextSegDiffSin = firstChild.getLength() * firstChildDiffSin / secondChild.getLength();
+      double nextSegDiffCos = Math.sqrt(1 - Math.pow(nextSegDiffSin, 2))
+          * Math.signum(Math.pow(secondChild.getLength(), 2) + Math.pow(segLength, 2)
+              - Math.pow(firstChild.getLength(), 2));
 
-      double nextSegCos = nextSegment.cosine * nextSegDiffCos - nextSegment.sine * nextSegDiffSin;
-      double nextSegSin = nextSegment.sine * nextSegDiffCos + nextSegment.cosine * nextSegDiffSin;
+      Angle nextRotatedAngle =
+          nextSegment.getAngle().getRotatedAngle(nextSegDiffCos, nextSegDiffSin);
 
-      tree[level][index + 1] = new PolarPoint(nextSegment.length, nextSegCos, nextSegSin);
+      tree[level][index + 1] = new PolarPoint(nextSegment.getLength(), nextRotatedAngle);
     }
 
   }
@@ -126,30 +139,7 @@ public class NoripiCrane implements CraneInterface {
       }
       System.out.println();
     }
-    System.out.println();
   }
 
-  private class PolarPoint {
-    private static final int PRECISION = 4;
-    private double length;
-    private double cosine;
-    private double sine;
 
-    public PolarPoint(double length, double cosine, double sine) {
-      this.length = length;
-      this.cosine = Math.round(cosine * Math.pow(10, PRECISION + 1)) / Math.pow(10, PRECISION + 1);
-      this.sine = Math.round(sine * Math.pow(10, PRECISION + 1)) / Math.pow(10, PRECISION + 1);
-    }
-
-    @Override
-    public String toString() {
-      return "[Len:" + this.length + " Angle:" + this.cosine + "/" + this.sine + "] ";
-    }
-
-    public double[] toRectangular() {
-      return new double[] {
-          Math.round(this.length * this.cosine * Math.pow(10, PRECISION)) / Math.pow(10, PRECISION),
-          Math.round(this.length * this.sine * Math.pow(10, PRECISION)) / Math.pow(10, PRECISION)};
-    }
-  }
 }

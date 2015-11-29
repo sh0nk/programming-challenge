@@ -5,7 +5,7 @@ import org.junit.Test;
 
 public class CraneTest {
   // replace by your implementation class here
-  private CraneInterface yourImplementation = new CraneSh0nk();
+  private CraneInterface yourImplementation = new NoripiCrane();
 
   @Test
   public void craneTest1() {
@@ -21,12 +21,19 @@ public class CraneTest {
     timeMeasuredAssertEquals(new double[][] {{-10.0, 5.0}, {-5.0, 10.0}}, solver);
   }
 
-    @Test
-    public void craneTest3() {
-        CraneSolverWrapper solver =
-                new CraneSolverWrapper(3, 3, new int[] {5, 5, 5}, new int[] {1, 2, 1}, new int[] {270, 90, 90});
-        timeMeasuredAssertEquals(new double[][] {{-10.0, 5.0}, {-5.0, 10.0}, {5.0, 0.0}}, solver);
-    }
+  @Test
+  public void craneTest3() {
+    CraneSolverWrapper solver = new CraneSolverWrapper(3, 3, new int[] {5, 5, 5},
+        new int[] {1, 2, 1}, new int[] {270, 90, 90});
+    timeMeasuredAssertEquals(new double[][] {{-10.0, 5.0}, {-5.0, 10.0}, {5.0, 0.0}}, solver);
+  }
+
+  @Test
+  public void craneTest4() {
+    CraneSolverWrapper solver =
+        new CraneSolverWrapper(3, 3, new int[] {5, 5, 5}, new int[] {1, 2}, new int[] {60, 60});
+    timeMeasuredAssertEquals(new double[][] {{8.66, 0.0}, {0.0, 0.0}}, solver);
+  }
 
   private class CraneSolverWrapper {
     private int N;
@@ -53,7 +60,7 @@ public class CraneTest {
 
     double[][] results = solver.solve();
     for (int i = 0; i < expected.length; i++) {
-      Assert.assertArrayEquals(expected[i], results[i], 0);
+      Assert.assertArrayEquals(expected[i], results[i], 0.01);
     }
     long end = System.nanoTime();
 
