@@ -5,7 +5,7 @@ import org.junit.Test;
 
 public class CraneTest {
   // replace by your implementation class here
-  private CraneInterface yourImplementation = new NoripiCrane();
+  private CraneInterface yourImplementation = new CraneSh0nk();
 
   @Test
   public void craneTest1() {
@@ -31,7 +31,7 @@ public class CraneTest {
   @Test
   public void craneTest4() {
     CraneSolverWrapper solver =
-        new CraneSolverWrapper(3, 3, new int[] {5, 5, 5}, new int[] {1, 2}, new int[] {60, 60});
+        new CraneSolverWrapper(3, 2, new int[] {5, 5, 5}, new int[] {1, 2}, new int[] {60, 60});
     timeMeasuredAssertEquals(new double[][] {{8.66, 0.0}, {0.0, 0.0}}, solver);
   }
 

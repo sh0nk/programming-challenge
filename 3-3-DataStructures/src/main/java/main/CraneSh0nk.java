@@ -96,8 +96,8 @@ public class CraneSh0nk implements CraneInterface {
         for (int i = 0; i < C; i++) {
             update(S[i], A[i]);
             answers[i] = new double[]{
-                    Double.valueOf(String.format("%.1f", nodes[0].x)),
-                    Double.valueOf(String.format("%.1f", nodes[0].y))};
+                    Double.valueOf(String.format("%.2f", nodes[0].x)),
+                    Double.valueOf(String.format("%.2f", nodes[0].y))};
         }
 
         return answers;
