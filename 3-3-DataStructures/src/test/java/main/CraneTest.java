@@ -35,6 +35,27 @@ public class CraneTest {
     timeMeasuredAssertEquals(new double[][] {{8.66, 0.0}, {0.0, 0.0}}, solver);
   }
 
+  @Test
+  public void craneTest5() {
+    CraneSolverWrapper solver =
+        new CraneSolverWrapper(3, 2, new int[] {3, 5, 4}, new int[] {1, 2}, new int[] {53, 37});
+    timeMeasuredAssertEquals(new double[][] {{7.19, -2.41}, {0.0, 0.0}}, solver);
+  }
+
+  @Test
+  public void craneTest6() {
+    CraneSolverWrapper solver =
+        new CraneSolverWrapper(3, 4, new int[] {5, 5, 5}, new int[] {1, 2, 1, 1}, new int[] {0, 0, 180, 270});
+    timeMeasuredAssertEquals(new double[][] {{0.0, -5.0}, {0.0, 5.0}, {0.0, 5.0}, {0.0, 5.0}}, solver);
+  }
+
+  @Test
+  public void craneTest7() {
+    CraneSolverWrapper solver =
+        new CraneSolverWrapper(3, 2, new int[] {5, 5, 5}, new int[] {2, 2}, new int[] {1, 359});
+    timeMeasuredAssertEquals(new double[][] {{0.09, 5.0}, {-0.09, 5.0}}, solver);
+  }
+
   private class CraneSolverWrapper {
     private int N;
     private int C;
