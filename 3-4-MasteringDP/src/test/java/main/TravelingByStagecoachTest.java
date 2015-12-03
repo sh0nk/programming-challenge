@@ -10,7 +10,13 @@ public class TravelingByStagecoachTest {
     @Test
     public void test1() {
         TravelingByStagecoachWrapper solver =
-                new TravelingByStagecoachWrapper(2, 4, 2, 1, new int[]{3, 1});
+                new TravelingByStagecoachWrapper(2, 4, 2, 1, new int[]{3, 1}
+                ,new int[][] {
+                        {0, 0, 3, 2},
+                        {0, 0, 3, 5},
+                        {3, 3, 0, 0},
+                        {2, 5, 0, 0}
+                });
         timeMeasuredAssertEquals(3.667, solver);
     }
 
@@ -20,17 +26,19 @@ public class TravelingByStagecoachTest {
         private int a;
         private int b;
         private int[] t;
+        private int[][] d;
 
-        public TravelingByStagecoachWrapper(int n, int m, int a, int b, int[] t) {
+        public TravelingByStagecoachWrapper(int n, int m, int a, int b, int[] t, int[][] d) {
             this.n = n;
             this.m = m;
             this.a = a;
             this.b = b;
             this.t = t;
+            this.d = d;
         }
 
         double solve() {
-            return yourImplementation.solve(this.n, this.m, this.a, this.b, this.t);
+            return yourImplementation.solve(this.n, this.m, this.a, this.b, this.t, this.d);
         }
     }
 
