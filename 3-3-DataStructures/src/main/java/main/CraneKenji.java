@@ -75,7 +75,7 @@ public class CraneKenji implements CraneInterface {
         Obj obj = new Obj(null, 0, 0, 90);
         initialize(obj, L, 0);
 
-        double[][] ans = new double[A.length][2];
+        double[][] ans = new double[C][2];
         for (int c = 0; c < C; c++) {
             obj.operate(S[c], A[c], N);
             Obj leaf = obj.leaf();
