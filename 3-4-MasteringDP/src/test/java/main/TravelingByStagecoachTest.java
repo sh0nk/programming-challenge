@@ -19,6 +19,20 @@ public class TravelingByStagecoachTest {
                 });
         timeMeasuredAssertEquals(3.667, solver);
     }
+    
+    @Test
+    public void test2() {
+        TravelingByStagecoachWrapper solver =
+                new TravelingByStagecoachWrapper(4, 5, 4, 5, new int[]{2, 3, 4, 3}
+                ,new int[][] {
+                        {0, 0, 3, 2, 0},
+                        {0, 0, 4, 0, 3},
+                        {3, 4, 0, 7, 0},
+                        {2, 0, 7, 0, 20},
+                        {0, 3, 0, 20, 0},
+                });
+        timeMeasuredAssertEquals(4, solver);
+    }
 
     private class TravelingByStagecoachWrapper {
         private int n;
