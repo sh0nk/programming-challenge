@@ -5,7 +5,7 @@ import org.junit.Test;
 
 public class TravelingByStagecoachTest {
     // replace by your implementation class here
-    private TravelingByStagecoachInterface yourImplementation = new TravelingByStagecoach();
+    private TravelingByStagecoachInterface yourImplementation = new Kenji_T_TravelingByStagecoach();
 
     @Test
     public void test1() {
@@ -23,7 +23,7 @@ public class TravelingByStagecoachTest {
     @Test
     public void test2() {
         TravelingByStagecoachWrapper solver =
-                new TravelingByStagecoachWrapper(4, 5, 4, 5, new int[]{2, 3, 4, 3}
+                new TravelingByStagecoachWrapper(4, 5, 4, 5, new int[]{3, 3, 4, 2}
                 ,new int[][] {
                         {0, 0, 3, 2, 0},
                         {0, 0, 4, 0, 3},

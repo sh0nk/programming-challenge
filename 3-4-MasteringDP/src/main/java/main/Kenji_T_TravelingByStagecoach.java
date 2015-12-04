@@ -1,9 +1,5 @@
 package main;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 public class Kenji_T_TravelingByStagecoach implements TravelingByStagecoachInterface {
 
     /**
@@ -30,8 +26,7 @@ public class Kenji_T_TravelingByStagecoach implements TravelingByStagecoachInter
             }
         }
 
-        int[] orig_t = Arrays.copyOf(t, t.length);
-        double ret = loop(0, d, memo, -1, a - 1, b - 1, 0.0, Double.MAX_VALUE, t, orig_t);
+        double ret = loop(0, d, memo, -1, a - 1, b - 1, 0.0, Double.MAX_VALUE, t);
 
         System.out.println("==================");
         System.out.println(ret);
@@ -40,7 +35,7 @@ public class Kenji_T_TravelingByStagecoach implements TravelingByStagecoachInter
         return ret;
     }
 
-    double loop(int cnt, int d[][], double memo[][], int prev_city, int city, int end_city, double g_cost, double final_cost_min, int[] t, int[] orig_t) {
+    double loop(int cnt, int d[][], double memo[][], int prev_city, int city, int end_city, double g_cost, double final_cost_min, int[] t) {
         if (city == end_city) {
             return g_cost;
         }
@@ -51,32 +46,40 @@ public class Kenji_T_TravelingByStagecoach implements TravelingByStagecoachInter
             if (local_cost == 0 || prev_city == next_city)
                 continue;
             for (int it = 0; it < t.length; it++) {
-                int t2[] = new int[t.length-1];
-                int a=0;
-                for(int i=0;i<t.length; i++) {
-                    if (i==it)
-                        continue;
-                    t2[a] = t[i];
-                    a++;
-                }
+                int t2[] = removedArrayByIndex(t, it);
                 double _g_cost = local_cost / t[it] + g_cost;
                 double _g_min_cost = memo[next_city][it];
 
                 System.out.println(cnt + " [ " + (city + 1) + " -> " + (next_city + 1) + " ]" + ", t" + it + "(" + t[it] +
                         ")" + ", gcost: " + _g_cost + ", gcost_min: " + _g_min_cost + "   " + t2.length);
-                //if (_g_cost < _g_min_cost) {
-                    memo[next_city][it] = _g_cost;
-                    double ret = loop(cnt+1, d, memo, city, next_city, end_city, _g_cost, final_cost_min, t2, orig_t);
-                    if (ret < final_cost_min) {
-                        System.out.println("*** " + ret + " < " + final_cost_min + " [ " + (city + 1) + " -> " + (next_city + 1) + " ]" +
-                                ", t" + it + "(" + t[it] + ")" +
-                                ", gcost: " + _g_cost + ", gcost_min: " + _g_min_cost);
-                        final_cost_min = ret;
-                    }
-                //}
+                // if (_g_cost < _g_min_cost) {
+                memo[next_city][it] = _g_cost;
+                double ret = loop(cnt + 1, d, memo, city, next_city, end_city, _g_cost, final_cost_min, t2);
+                if (ret < final_cost_min) {
+                    System.out.println("*** " + ret + " < " + final_cost_min + " [ " + (city + 1) + " -> " + (next_city + 1) + " ]" +
+                            ", t" + it + "(" + t[it] + ")" +
+                            ", gcost: " + _g_cost + ", gcost_min: " + _g_min_cost);
+                    final_cost_min = ret;
+                }
+                // }
             }
         }
         return final_cost_min;
+    }
+
+    /**
+     * Returns an array of int whose one element is removed by an index given.
+     */
+    int[] removedArrayByIndex(int[] src, int idx) {
+        int dst[] = new int[src.length - 1];
+        int a = 0;
+        for (int i = 0; i < src.length; i++) {
+            if (i == idx)
+                continue;
+            dst[a] = src[i];
+            a++;
+        }
+        return dst;
     }
 
 }
