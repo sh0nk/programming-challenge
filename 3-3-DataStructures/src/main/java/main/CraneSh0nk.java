@@ -86,7 +86,7 @@ public class CraneSh0nk implements CraneInterface {
     public double[][] solve(int N, int C, int[] L, int[] S, int[] A) {
         lengths = L;
 
-        double[][] answers = new double[N][2];
+        double[][] answers = new double[C][2];
 
         // 2のべき乗になるNより大きい数をさがす
         findMaxN(N);
