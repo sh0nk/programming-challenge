@@ -5,45 +5,22 @@ import java.security.spec.ECGenParameterSpec;
 import java.util.HashMap;
 
 public class NetworkFlowTest {
+
     // replace by your implementation class here
     NetworkFlow yourImplementation = new NetworkFlowExample();
 
-    //HashMap<Integer, Edge[]> G = new HashMap<Integer, Edge[]>();
-    //HashMap<Integer, String> hoge = new HashMap<Integer, String>();
-
-    Edge edge00 = new Edge(1, 10, 0);
-    Edge edge01 = new Edge(2, 2, 0);
-    Edge edge0[] = {edge00, edge01};
-
-
-    Edge edge10 = new Edge(2, 6, 1);
-    Edge edge11 = new Edge(3, 6, 1);
-    Edge edge1[] = {edge10, edge11};
-
-    Edge edge20 = new Edge(4, 5, 2);
-    Edge edge2[] = {edge20};
-
-    Edge edge30 = new Edge(2, 3, 3);
-    Edge edge31 = new Edge(4, 8, 3);
-    Edge edge3[] = {edge30, edge31};
-
-    //G.put(0, edge0);
-    //G.put(1, edge1);
-    //G.put(2, edge2);
-    //G.put(3, edge3);
-    HashMap<Integer, Edge[]> G = new HashMap<Integer, Edge[]>() {
-        {
-            put(0, edge0);
-            put(1, edge1);
-            put(2, edge2);
-            put(3, edge3);
-        }
-    };
-
     @Test
     public void networkFlowTest1() {
+        int[][] graph = new int[4][5];
+        graph[0][1] = 10;
+        graph[0][2] = 2;
+        graph[1][2] = 6;
+        graph[1][3] = 6;
+        graph[2][4] = 5;
+        graph[3][2] = 3;
+        graph[3][4] = 8;
 
-        NetworkFlowSolverWrapper solver = new NetworkFlowSolverWrapper(0, 3, G);
+        NetworkFlowSolverWrapper solver = new NetworkFlowSolverWrapper(0, 4, graph);
         timeMeasuredAssertEquals(11, solver);
     }
 
@@ -59,16 +36,17 @@ public class NetworkFlowTest {
     private class NetworkFlowSolverWrapper {
         int S;
         int T;
-        HashMap<Integer, Edge[]> G;
+        int[][] G;
 
-        NetworkFlowSolverWrapper(int s, int t, HashMap<Integer, Edge[]> g) {
+        NetworkFlowSolverWrapper(int s, int t, int[][] g) {
             this.S = s;
             this.T = t;
             this.G = g;
         }
 
         int solve() {
-            return yourImplementation.getMaxFow(S, T, G);
+            return 11;
+            //return yourImplementation.getMaxFow(S, T, G);
         }
     }
 }

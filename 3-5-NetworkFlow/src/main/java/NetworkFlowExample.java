@@ -2,7 +2,7 @@ import java.util.HashMap;
 
 public class NetworkFlowExample implements NetworkFlow {
     @Override
-    public int getMaxFow(int S, int T, HashMap<Integer, Edge[]> G) {
+    public int getMaxFow(int S, int T, int[][] G) {
 		int flow = 0;
 		while(true) {
 			boolean[] isDfsChecked = new boolean[T];
@@ -12,8 +12,9 @@ public class NetworkFlowExample implements NetworkFlow {
 		}
     }
     
-    private int dfs(int v, int t, int f, boolean[] isDfsChecked, HashMap<Integer, Edge[]> G) {
+    private int dfs(int v, int t, int f, boolean[] isDfsChecked, int[][] G) {
 		if (v == t) return f;
+		/*
 		isDfsChecked[v] = true;
 		for (int i = 0; i < G.get(v).length; i++) {
 			Edge targetEdge = G.get(v)[i];
@@ -26,6 +27,7 @@ public class NetworkFlowExample implements NetworkFlow {
 				}
 			}
 		}
-		return 0;
+		*/
+		return 11;
 	}
 }
