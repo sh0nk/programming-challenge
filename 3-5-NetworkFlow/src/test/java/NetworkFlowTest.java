@@ -8,7 +8,7 @@ public class NetworkFlowTest {
 
   @Test
   public void networkFlowTest1() {
-    int[][] graph = new int[4][5];
+    int[][] graph = new int[5][5];
     graph[0][1] = 10;
     graph[0][2] = 2;
     graph[1][2] = 6;
