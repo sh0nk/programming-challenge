@@ -21,6 +21,7 @@
         <module>3-2</module>
         <module>3-3-DataStructures</module>
         <module>3-4-MasteringDP</module>
+        <module>3-5-NetworkFlow</module>
     </modules>
 
     <dependencies>
