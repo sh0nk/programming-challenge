@@ -6,7 +6,7 @@ public class NetworkFlowExample implements NetworkFlow {
 		int flow = 0;
 		while(true) {
 			boolean[] isDfsChecked = new boolean[T];
-			int f = dfs(S, T, 100000000, isDfsChecked, G);
+			int f = dfs(S, T, 10000000, isDfsChecked, G);
 			if (f == 0) return flow;
 			flow += f;
 		}
