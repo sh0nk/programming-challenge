@@ -11,7 +11,8 @@ public class NetworkFlowTest {
 
     @Test
     public void networkFlowTest1() {
-        int[][] graph = new int[4][5];
+        int[][] graph = new int[5][5];
+        graph[0][0] = 0;
         graph[0][1] = 10;
         graph[0][2] = 2;
         graph[1][2] = 6;
@@ -19,6 +20,7 @@ public class NetworkFlowTest {
         graph[2][4] = 5;
         graph[3][2] = 3;
         graph[3][4] = 8;
+        graph[4][4] = 0;
 
         NetworkFlowSolverWrapper solver = new NetworkFlowSolverWrapper(0, 4, graph);
         timeMeasuredAssertEquals(11, solver);
