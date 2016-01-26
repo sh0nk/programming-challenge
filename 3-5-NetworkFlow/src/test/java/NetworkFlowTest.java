@@ -21,6 +21,28 @@ public class NetworkFlowTest {
     timeMeasuredAssertEquals(11, solver);
   }
 
+  @Test
+  public void networkFlowTest2() {
+    //http://math.stackexchange.com/questions/840297/maximum-flow-ford-fulkerson
+    int[][] graph = new int[8][8];
+    graph[0][1] = 13;
+    graph[0][2] = 10;
+    graph[0][3] = 10;
+    graph[1][4] = 24;
+    graph[2][1] = 5;
+    graph[2][3] = 15;
+    graph[2][6] = 7;
+    graph[3][6] = 15;
+    graph[4][5] = 1;
+    graph[4][7] = 9;
+    graph[5][7] = 13;
+    graph[5][6] = 6;
+    graph[6][7] = 16;
+
+    NetworkFlowSolverWrapper solver = new NetworkFlowSolverWrapper(0, 7, graph);
+    timeMeasuredAssertEquals(25, solver);
+  }
+
 
   private void timeMeasuredAssertEquals(int expected, NetworkFlowSolverWrapper solver) {
     long start = System.nanoTime();
