@@ -1,4 +1,6 @@
 
+import java.util.Random;
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -69,6 +71,79 @@ public class JackStrawTest {
         "CONNECTED",
         "CONNECTED"
     };
+    timeMeasuredAssertEquals(expected, solver);
+  }
+
+  @Test
+  public void jackStrawTest3() {
+    int n = 4;
+    int[][] p = {
+        {0, 4},
+        {0, 1},
+        {1, 2},
+        {1, 0}
+    };
+    int[][] q = {
+        {4, 1},
+        {2, 3},
+        {3, 4},
+        {2, 1}
+    };
+    int m = 10000;
+    int[][] ab = new int[m][2];
+    String expected[] = new String[m];
+    for (int i = 0; i < m; i++) {
+      switch (i % 4) {
+        case 0:
+          ab[i] = new int[] {1, 2};
+          expected[i] = "CONNECTED";
+          break;
+        case 1:
+          ab[i] = new int[] {2, 3};
+          expected[i] = "NOT CONNECTED";
+        case 2:
+          ab[i] = new int[] {3, 4};
+          expected[i] = "CONNECTED";
+        case 3:
+          ab[i] = new int[] {2, 4};
+          expected[i] = "NOT CONNECTED";
+      }
+    }
+
+    NetworkFlowSolverWrapper solver = new NetworkFlowSolverWrapper(n, p, q, m, ab);
+    timeMeasuredAssertEquals(expected, solver);
+  }
+
+  @Test
+  public void jackStrawTest4() {
+    int n = 12;
+    int[][] p = {
+        {0, 2}, {8, 5}, {2, 3}, {4, 4}, {6, 4}, {9, 4}, {0, 4}, {8, 2}, {5, 4}, {3, 4}, {9, 1},
+        {6, 6},
+    };
+    int[][] q = {
+        {2, 4}, {10, 5}, {5, 2}, {6, 3}, {7, 6}, {10, 6}, {3, 1}, {10, 3}, {4, 2}, {2, 1}, {8, 3},
+        {8, 5},
+    };
+    int m = 10000;
+    int[][] abSample =
+        new int[][] {{1, 2}, {3, 5}, {4, 7}, {6, 9}, {10, 3}, {6, 10}, {7, 5}, {3, 12},
+            {11, 6}, {4, 11}, {8, 1}, {10, 4}, {8, 11}, {9, 3}, {12, 2}, {6, 12}};
+    String expectedSample[] =
+        new String[] {"NOT CONNECTED", "NOT CONNECTED", "CONNECTED", "NOT CONNECTED", "CONNECTED",
+            "NOT CONNECTED", "NOT CONNECTED", "NOT CONNECTED", "NOT CONNECTED", "NOT CONNECTED",
+            "NOT CONNECTED", "CONNECTED", "CONNECTED", "CONNECTED", "CONNECTED", "CONNECTED"};
+
+    int[][] ab = new int[m][2];
+    String[] expected = new String[m];
+    Random random = new Random(0);
+    for (int i = 0; i < m; i++) {
+      int index = random.nextInt(abSample.length);
+      ab[i] = abSample[index];
+      expected[i] = expectedSample[index];
+    }
+
+    NetworkFlowSolverWrapper solver = new NetworkFlowSolverWrapper(n, p, q, m, ab);
     timeMeasuredAssertEquals(expected, solver);
   }
 
