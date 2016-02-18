@@ -4,7 +4,7 @@ import org.junit.Test;
 public class NetworkFlowTest {
 
   // replace by your implementation class here
-  NetworkFlow yourImplementation = new NetworkFlowExample();
+  NetworkFlow yourImplementation = new NoripiNetworkFlow();
 
   @Test
   public void networkFlowTest1() {
@@ -23,7 +23,7 @@ public class NetworkFlowTest {
 
   @Test
   public void networkFlowTest2() {
-    //http://math.stackexchange.com/questions/840297/maximum-flow-ford-fulkerson
+    // http://math.stackexchange.com/questions/840297/maximum-flow-ford-fulkerson
     int[][] graph = new int[8][8];
     graph[0][1] = 13;
     graph[0][2] = 10;
