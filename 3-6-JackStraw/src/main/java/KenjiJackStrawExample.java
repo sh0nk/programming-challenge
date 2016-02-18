@@ -40,9 +40,9 @@ public class KenjiJackStrawExample implements JackStrawInterface {
   @Override
   public String[] solve(int n, int[][] p, int[][] q, int m, int[][] ab) {
     System.out.println("========================");
-
     String[] answers = new String[m];
 
+    // Represent given int array with Line class.
     List<Line> lines = new ArrayList<Line>();
     for (int i = 0; i < n; i++) {
       int px = p[i][0];
@@ -55,6 +55,7 @@ public class KenjiJackStrawExample implements JackStrawInterface {
       lines.add(line);
     }
 
+    // Create connected lists with each other
     for (Line line1 : lines) {
       for (Line line2 : lines) {
         if (line1.equals(line2))
