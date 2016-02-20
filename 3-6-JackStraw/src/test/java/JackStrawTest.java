@@ -4,7 +4,7 @@ import org.junit.Test;
 
 public class JackStrawTest {
 
-  JackStrawInterface yourImplementation = new KenjiJackStrawExample();
+  JackStrawInterface yourImplementation = new JackStrawExample();
 
   @Test
   public void jackStrawTest1() {
