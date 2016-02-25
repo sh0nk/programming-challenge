@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class NumberSetsTest {
+  private static final long TIMEOUT_MILLISEC = 2000;
   private long startTime;
 
   private NumberSetsInterface yourImplementation = new NumberSetsExample();
@@ -21,23 +22,28 @@ public class NumberSetsTest {
         String.format("Finished execution in: %f millis.", timeElapsed));
   }
 
-  @Test
+  @Test(timeout = TIMEOUT_MILLISEC)
   public void test1() {
     assertEquals(9, this.yourImplementation.solve(10, 20, 5));
   }
 
-  @Test
+  @Test(timeout = TIMEOUT_MILLISEC)
   public void test2() {
     assertEquals(7, this.yourImplementation.solve(10, 20, 3));
   }
 
-  @Test
+  @Test(timeout = TIMEOUT_MILLISEC)
   public void test3() {
     assertEquals(443, this.yourImplementation.solve(7, 2_000, 10));
   }
 
-  @Test
+  @Test(timeout = TIMEOUT_MILLISEC)
   public void test4() {
     assertEquals(1997, this.yourImplementation.solve(443, 20_000, 7));
+  }
+
+  @Test(timeout = TIMEOUT_MILLISEC)
+  public void test5() {
+    assertEquals(1997, this.yourImplementation.solve(1997, 200_000, 443));
   }
 }
