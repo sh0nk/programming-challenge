@@ -46,4 +46,9 @@ public class NumberSetsTest {
   public void test5() {
     assertEquals(1997, this.yourImplementation.solve(1997, 200_000, 443));
   }
+
+    @Test(timeout = TIMEOUT_MILLISEC)
+    public void test6() {
+        assertEquals(2, this.yourImplementation.solve(200, 204, 2));
+    }
 }
