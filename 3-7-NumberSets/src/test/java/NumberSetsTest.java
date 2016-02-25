@@ -30,4 +30,14 @@ public class NumberSetsTest {
   public void test2() {
     assertEquals(7, this.yourImplementation.solve(10, 20, 3));
   }
+
+  @Test
+  public void test3() {
+    assertEquals(443, this.yourImplementation.solve(7, 2_000, 10));
+  }
+
+  @Test
+  public void test4() {
+    assertEquals(1997, this.yourImplementation.solve(443, 20_000, 7));
+  }
 }
