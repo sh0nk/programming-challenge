@@ -17,5 +17,5 @@
  * @author Noriyuki Ishida
  */
 public interface NumberSetsInterface {
-  public int solve(int A, int B, int P);
+  public int solve(long A, long B, long P);
 }
