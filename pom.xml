@@ -22,7 +22,8 @@
         <module>3-5-NetworkFlow</module>
         <module>3-6-JackStraw</module>
     <module>3-7-NumberSets</module>
-  </modules>
+        <module>4-1-InclusionAndExclusion</module>
+    </modules>
 
     <dependencies>
         <dependency>
