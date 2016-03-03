@@ -5,10 +5,10 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 public class InclusionAndExclusionTest {
-    private static final long TIMEOUT_MILLISEC = 20000;
+    private static final long TIMEOUT_MILLISEC = 2000000;
     private long startTime;
 
-    private InclusionAndExclusionInterface yourImplementation = new InclusionAndExclusionExample();
+    private InclusionAndExclusionInterface yourImplementation = new KenjiInclusionAndExclusion();
 
     @Before
     public void setUp() {
@@ -39,7 +39,7 @@ public class InclusionAndExclusionTest {
 
     @Test(timeout = TIMEOUT_MILLISEC)
     public void test4() {
-        assertEquals(6, this.yourImplementation.solve(6, 6, new int[]{1, 2, 3, 4, 5, 6}));
+        assertEquals(6, this.yourImplementation.solve(1000000000, 15, new int[]{999999999, 999999998, 999999997, 999999996, 999999995, 999999994, 99999993, 999999992, 999999991, 999999990, 999999989, 999999988, 999999987, 999999986, 999999985}));
     }
 
 }
