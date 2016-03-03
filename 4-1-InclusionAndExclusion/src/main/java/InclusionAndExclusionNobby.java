@@ -27,7 +27,7 @@ public class InclusionAndExclusionNobby implements InclusionAndExclusionInterfac
             for (int j = i; j != 0; j >>= 1) {
                 num += (j & 1);
             }
-            int lcm = 1;
+            long lcm = 1;
             for (int j = 0; j < m; j++) {
                 if (((i >> j) & 1) == 1) {
                     lcm = lcm / Gcd.gcd(lcm, a[j]) * a[j];

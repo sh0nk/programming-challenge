@@ -8,7 +8,7 @@ public class InclusionAndExclusionTest {
   private static final long TIMEOUT_MILLISEC = 20000;
   private long startTime;
 
-  private InclusionAndExclusionInterface yourImplementation = new KenjiInclusionAndExclusion();
+  private InclusionAndExclusionInterface yourImplementation = new InclusionAndExclusionNobby();
 
   @Before
   public void setUp() {
