@@ -39,7 +39,7 @@ public class InclusionAndExclusionTest {
 
   @Test(timeout = TIMEOUT_MILLISEC)
   public void test4() {
-    assertEquals(6, this.yourImplementation.solve(6, 15, new int[] { 1, 2, 3, 4, 5, 6 }));
+    assertEquals(6, this.yourImplementation.solve(6, 6, new int[] { 1, 2, 3, 4, 5, 6 }));
   }
 
   @Test(timeout = TIMEOUT_MILLISEC)
