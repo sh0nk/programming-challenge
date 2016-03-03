@@ -7,7 +7,7 @@ public class KenjiJackStrawExample implements JackStrawInterface {
     Point p;
     Point q;
     int num;
-    List<Line> connectedLists = new ArrayList<Line>();
+    List<Line> connectedLines = new ArrayList<Line>();
 
     Line(Point p, Point q, int num) {
       this.p = p;
@@ -61,7 +61,7 @@ public class KenjiJackStrawExample implements JackStrawInterface {
         if (line1.equals(line2))
           continue;
         if (isIntersected(line1, line2)) {
-          line1.connectedLists.add(line2);
+          line1.connectedLines.add(line2);
         }
       }
     }
@@ -69,8 +69,7 @@ public class KenjiJackStrawExample implements JackStrawInterface {
     for (int i = 0; i < m; i++) {
       Line aLine = lines.get(ab[i][0] - 1);
       Line bLine = lines.get(ab[i][1] - 1);
-      List<Integer> checkedNum = new ArrayList<>();
-      if (isConnected(aLine, bLine, checkedNum)) {
+      if (isConnected(aLine, bLine, new ArrayList<>())) {
         answers[i] = "CONNECTED";
         System.out.println(answers[i]);
         continue;
@@ -91,14 +90,14 @@ public class KenjiJackStrawExample implements JackStrawInterface {
    * @return true if the two lines are connected, false if not.
    */
   public boolean isConnected(Line start, Line target, List<Integer> checkedNum) {
-    if (start.connectedLists.isEmpty()) {
+    if (start.connectedLines.isEmpty()) {
       return false;
     }
-    if (start.connectedLists.contains(target)) {
+    if (start.connectedLines.contains(target)) {
       return true;
     }
     checkedNum.add(start.num);
-    for (Line next : start.connectedLists) {
+    for (Line next : start.connectedLines) {
       if (checkedNum.contains(next.num)) {
         continue;
       }
