@@ -8,7 +8,7 @@ public class InclusionAndExclusionTest {
   private static final long TIMEOUT_MILLISEC = 20000;
   private long startTime;
 
-  private InclusionAndExclusionInterface yourImplementation = new InclusionAndExclusionExample();
+  private InclusionAndExclusionInterface yourImplementation = new KenjiInclusionAndExclusion();
 
   @Before
   public void setUp() {
@@ -39,7 +39,7 @@ public class InclusionAndExclusionTest {
 
   @Test(timeout = TIMEOUT_MILLISEC)
   public void test4() {
-    assertEquals(6, this.yourImplementation.solve(1000000000, 15, new int[] { 1, 2, 3, 4, 5, 6 }));
+    assertEquals(6, this.yourImplementation.solve(6, 15, new int[] { 1, 2, 3, 4, 5, 6 }));
   }
 
   @Test(timeout = TIMEOUT_MILLISEC)
