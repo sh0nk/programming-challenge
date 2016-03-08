@@ -21,8 +21,9 @@
         <module>3-4-MasteringDP</module>
         <module>3-5-NetworkFlow</module>
         <module>3-6-JackStraw</module>
-    <module>3-7-NumberSets</module>
+        <module>3-7-NumberSets</module>
         <module>4-1-InclusionAndExclusion</module>
+        <module>4-2-CoinGame1</module>
     </modules>
 
     <dependencies>
@@ -72,3 +73,4 @@
     </dependencyManagement>
 
 </project>
+<!-- vim:set sw=4 ts=4: -->
