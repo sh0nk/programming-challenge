@@ -38,4 +38,20 @@ public class CoinGame1Test {
     assertEquals("Bob", this.yourImplementation.solve(x, k, a));
   }
 
+  @Test(timeout = TIMEOUT_MILLISEC)
+  public void test3() {
+    int x = 9;
+    int[] a = new int[] { 1, 2, 4 };
+    int k = a.length;
+    assertEquals("Alice", this.yourImplementation.solve(x, k, a));
+  }
+
+  @Test(timeout = TIMEOUT_MILLISEC)
+  public void test4() {
+    int x = 15;
+    int[] a = new int[] { 1, 4, 8 };
+    int k = a.length;
+    assertEquals("Alice", this.yourImplementation.solve(x, k, a));
+  }
+
 }
