@@ -30,4 +30,12 @@ public class CoinGame1Test {
     assertEquals("Alice", this.yourImplementation.solve(x, k, a));
   }
 
+  @Test(timeout = TIMEOUT_MILLISEC)
+  public void test2() {
+    int x = 10;
+    int k = 2;
+    int[] a = new int[] { 1, 4 };
+    assertEquals("Bob", this.yourImplementation.solve(x, k, a));
+  }
+
 }
