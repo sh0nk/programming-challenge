@@ -43,7 +43,7 @@ public class CoinGame1Test {
     int x = 9;
     int[] a = new int[] { 1, 2, 4 };
     int k = a.length;
-    assertEquals("Alice", this.yourImplementation.solve(x, k, a));
+    assertEquals("Bob", this.yourImplementation.solve(x, k, a));
   }
 
   @Test(timeout = TIMEOUT_MILLISEC)
@@ -59,7 +59,7 @@ public class CoinGame1Test {
         int x = 9;
         int[] a = new int[] { 1, 3, 4 };
         int k = a.length;
-        assertEquals("Alice", this.yourImplementation.solve(x, k, a));
+        assertEquals("Bob", this.yourImplementation.solve(x, k, a));
     }
 
     @Test(timeout = TIMEOUT_MILLISEC)
@@ -75,7 +75,7 @@ public class CoinGame1Test {
         int x = 22;
         int[] a = new int[] { 1, 3, 4, 5 };
         int k = a.length;
-        assertEquals("Bob", this.yourImplementation.solve(x, k, a));
+        assertEquals("Alice", this.yourImplementation.solve(x, k, a));
     }
 
 }
