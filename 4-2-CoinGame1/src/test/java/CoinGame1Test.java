@@ -54,28 +54,28 @@ public class CoinGame1Test {
     assertEquals("Alice", this.yourImplementation.solve(x, k, a));
   }
 
-    @Test(timeout = TIMEOUT_MILLISEC)
-    public void test5() {
-        int x = 9;
-        int[] a = new int[] { 1, 3, 4 };
-        int k = a.length;
-        assertEquals("Alice", this.yourImplementation.solve(x, k, a));
-    }
+  @Test(timeout = TIMEOUT_MILLISEC)
+  public void test5() {
+    int x = 9;
+    int[] a = new int[] { 1, 3, 4 };
+    int k = a.length;
+    assertEquals("Alice", this.yourImplementation.solve(x, k, a));
+  }
 
-    @Test(timeout = TIMEOUT_MILLISEC)
-    public void test6() {
-        int x = 9;
-        int[] a = new int[] { 1, 2, 3, 4, 5 };
-        int k = a.length;
-        assertEquals("Alice", this.yourImplementation.solve(x, k, a));
-    }
+  @Test(timeout = TIMEOUT_MILLISEC)
+  public void test6() {
+    int x = 9;
+    int[] a = new int[] { 1, 2, 3, 4, 5 };
+    int k = a.length;
+    assertEquals("Alice", this.yourImplementation.solve(x, k, a));
+  }
 
-    @Test(timeout = TIMEOUT_MILLISEC)
-    public void test7() {
-        int x = 22;
-        int[] a = new int[] { 1, 3, 4, 5 };
-        int k = a.length;
-        assertEquals("Bob", this.yourImplementation.solve(x, k, a));
-    }
+  @Test(timeout = TIMEOUT_MILLISEC)
+  public void test7() {
+    int x = 22;
+    int[] a = new int[] { 1, 3, 4, 5 };
+    int k = a.length;
+    assertEquals("Bob", this.yourImplementation.solve(x, k, a));
+  }
 
 }
