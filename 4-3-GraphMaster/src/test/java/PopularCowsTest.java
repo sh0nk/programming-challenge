@@ -30,4 +30,13 @@ public class PopularCowsTest {
     assertEquals(1, this.yourImplementation.solve(N, M, A, B));
   }
 
+  @Test
+  public void test2() {
+    int N = 6;
+    int M = 7;
+    int[] A = {1, 2, 2, 3, 4, 5, 6};
+    int[] B = {3, 1, 5, 4, 5, 6, 4};
+    assertEquals(3, this.yourImplementation.solve(N, M, A, B));
+  }
+
 }
