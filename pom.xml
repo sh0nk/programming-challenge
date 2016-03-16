@@ -24,6 +24,8 @@
         <module>3-7-NumberSets</module>
         <module>4-1-InclusionAndExclusion</module>
         <module>4-2-CoinGame1</module>
+        <module>4-3-CuttingGame</module>
+        <module>4-3-GraphMaster</module>
     </modules>
 
     <dependencies>
