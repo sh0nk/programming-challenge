@@ -1,8 +1,7 @@
 package main;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class KenjiAnonymousSequenceSolver implements IAnonymousSequenceSolver {
@@ -22,56 +21,55 @@ public class KenjiAnonymousSequenceSolver implements IAnonymousSequenceSolver {
     }
     // System.out.println(map);
 
-    List<Integer> list = new ArrayList<Integer>();
+    int[] array = new int[map.size()];
     int prev = 0;
     int key = 0;
+    int cnt = 0;
     for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
       key = entry.getKey();
       if (prev != 0) {
         for (int i = 1; i < key - prev; i++) {
-          list.add(0);
+          array[cnt] = 0;
+          cnt++;
         }
       }
-      list.add(entry.getValue());
+      array[cnt] = entry.getValue();
+      cnt++;
       prev = key;
     }
-    // Collections.reverse(list);
 
-    int ans = loop(list, k);
+    int ans = loop(array, k);
     System.out.println(ans);
-
     return ans;
   }
 
-  private int loop(List<Integer> list, int k) {
+  // main
+  private int loop(int[] array, int k) {
+
     int global_cnt = 0;
     boolean flag = false;
 
     System.out.println("k = " + k);
-    System.out.println(list + ":" + global_cnt);
+    System.out.println(Arrays.toString(array) + ":" + global_cnt);
 
-    while (!check(list, k)) {
-      for (int i = list.size() - 1; i >= 0; i--) {
-        int first = list.get(i);
+    while (!check(array, k)) {
+      for (int i = array.length - 1; i >= 0; i--) {
+        int first = array[i];
         if (!flag && first < k && first > 0) {
           if (i - 1 < 0) {
             flag = true;
             break;
           }
-          list.remove(i);
-          int second = list.remove(i - 1);
-          list.add(i - 1, 0);
-          list.add(i - 1, first + second);
+          array[i] = 0;
+          array[i - 1] = first + array[i - 1];
           global_cnt += first;
-          System.out.println(list + ":" + global_cnt);
+          System.out.println(Arrays.toString(array) + ":" + global_cnt);
           break;
         } else if (flag && first > 0) {
-          list.remove(i);
-          int second = list.remove(i - 1);
-          list.add(i - 1, first - 1);
-          list.add(i - 1, second + 1);
+          array[i] = array[i] - 1;
+          array[i - 1] = array[i - 1] + 1;
           global_cnt++;
-          System.out.println(list + ":" + global_cnt);
+          System.out.println(Arrays.toString(array) + ":" + global_cnt);
           flag = false;
         }
       }
@@ -79,8 +77,9 @@ public class KenjiAnonymousSequenceSolver implements IAnonymousSequenceSolver {
     return global_cnt;
   }
 
-  private boolean check(List<Integer> list, int k) {
-    for (int i : list) {
+  // check if everything is fine
+  private boolean check(int[] array, int k) {
+    for (int i : array) {
       if (i == 0)
         continue;
       if (i < k)
