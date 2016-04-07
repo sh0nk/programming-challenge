@@ -26,7 +26,8 @@
         <module>4-2-CoinGame1</module>
         <module>4-2-CuttingGame</module>
         <module>4-3-GraphMaster</module>
-    </modules>
+    <module>4-4-KAnonymousSequence</module>
+  </modules>
 
     <dependencies>
         <dependency>
@@ -74,5 +75,4 @@
         </dependencies>
     </dependencyManagement>
 
-</project>
-<!-- vim:set sw=4 ts=4: -->
+</project><!-- vim:set sw=4 ts=4: -->
