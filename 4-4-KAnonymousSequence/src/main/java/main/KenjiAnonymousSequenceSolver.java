@@ -20,6 +20,8 @@ public class KenjiAnonymousSequenceSolver implements IAnonymousSequenceSolver {
         map.put(num, cnt + 1);
       }
     }
+    // System.out.println(map);
+
     List<Integer> list = new ArrayList<Integer>();
     int prev = 0;
     int key = 0;
@@ -35,9 +37,6 @@ public class KenjiAnonymousSequenceSolver implements IAnonymousSequenceSolver {
     }
     // Collections.reverse(list);
 
-    System.out.println(map);
-    System.out.println(list);
-    
     int ans = loop(list, k);
     System.out.println(ans);
 
@@ -46,17 +45,34 @@ public class KenjiAnonymousSequenceSolver implements IAnonymousSequenceSolver {
 
   private int loop(List<Integer> list, int k) {
     int global_cnt = 0;
+    boolean flag = false;
+
+    System.out.println("k = " + k);
+    System.out.println(list + ":" + global_cnt);
 
     while (!check(list, k)) {
-      for (int i = list.size() - 1; i > 0; i--) {
+      for (int i = list.size() - 1; i >= 0; i--) {
         int first = list.get(i);
-        if (first < k) {
+        if (!flag && first < k && first > 0) {
+          if (i - 1 < 0) {
+            flag = true;
+            break;
+          }
           list.remove(i);
           int second = list.remove(i - 1);
-          list.add(first + second);
+          list.add(i - 1, 0);
+          list.add(i - 1, first + second);
           global_cnt += first;
-          System.out.println(list);
+          System.out.println(list + ":" + global_cnt);
           break;
+        } else if (flag && first > 0) {
+          list.remove(i);
+          int second = list.remove(i - 1);
+          list.add(i - 1, first - 1);
+          list.add(i - 1, second + 1);
+          global_cnt++;
+          System.out.println(list + ":" + global_cnt);
+          flag = false;
         }
       }
     }
@@ -65,9 +81,10 @@ public class KenjiAnonymousSequenceSolver implements IAnonymousSequenceSolver {
 
   private boolean check(List<Integer> list, int k) {
     for (int i : list) {
-      if (i < k) {
+      if (i == 0)
+        continue;
+      if (i < k)
         return false;
-      }
     }
     return true;
   }
