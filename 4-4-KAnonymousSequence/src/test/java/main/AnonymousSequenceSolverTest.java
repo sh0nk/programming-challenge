@@ -9,7 +9,7 @@ import org.junit.Test;
 public class AnonymousSequenceSolverTest {
   private long startTime;
 
-  private IAnonymousSequenceSolver yourImplementation = new KenjiAnonymousSequenceSolver();
+  private IAnonymousSequenceSolver yourImplementation = new AnonymousSequenceSolverExample();
 
   @Before
   public void setUp() {

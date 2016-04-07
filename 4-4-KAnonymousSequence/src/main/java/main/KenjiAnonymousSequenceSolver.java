@@ -19,9 +19,9 @@ public class KenjiAnonymousSequenceSolver implements IAnonymousSequenceSolver {
         map.put(num, cnt + 1);
       }
     }
-    // System.out.println(map);
+    System.out.println(map);
 
-    int[] array = new int[map.size()];
+    int[] array = new int[a[n - 1] - a[0] + 1];
     int prev = 0;
     int key = 0;
     int cnt = 0;
@@ -56,6 +56,7 @@ public class KenjiAnonymousSequenceSolver implements IAnonymousSequenceSolver {
       for (int i = array.length - 1; i >= 0; i--) {
         int first = array[i];
         if (!flag && first < k && first > 0) {
+          // とりあえず、最上位から走査して、kに満たない項を下にマージする
           if (i - 1 < 0) {
             flag = true;
             break;
@@ -65,13 +66,16 @@ public class KenjiAnonymousSequenceSolver implements IAnonymousSequenceSolver {
           global_cnt += first;
           System.out.println(Arrays.toString(array) + ":" + global_cnt);
           break;
-        } else if (flag && first > 0) {
+        } else if (flag && first > k) {
+          // 最後まで走査してなおkに満たさない項が残った場合、最上位から再度走査して、既に確定済みで、kより大きいのを下に下げる
+          // TODO: first > k だと一度k個確定したものを下に流さないが、これで通らないテストがありそう
           array[i] = array[i] - 1;
           array[i - 1] = array[i - 1] + 1;
           global_cnt++;
           System.out.println(Arrays.toString(array) + ":" + global_cnt);
           flag = false;
         }
+        // TODO: 多分他にも条件が必要、上位のどこを下に流すかで、再帰的に走査しないといけなさそう
       }
     }
     return global_cnt;
