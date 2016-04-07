@@ -38,6 +38,11 @@ public class KenjiAnonymousSequenceSolver implements IAnonymousSequenceSolver {
       prev = key;
     }
 
+    // ここまでで、
+    // { 2, 2, 3, 4, 4, 5, 5 } これを
+    // {2=2, 3=1, 4=2, 5=2} こうして
+    // [2, 1, 2, 2] この配列を作成
+
     int ans = loop(array, k);
     System.out.println(ans);
     return ans;
