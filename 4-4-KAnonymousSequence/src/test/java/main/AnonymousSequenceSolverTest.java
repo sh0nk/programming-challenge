@@ -32,4 +32,22 @@ public class AnonymousSequenceSolverTest {
     assertEquals(3, this.yourImplementation.solve(n, k, a));
   }
 
+  @Test
+  public void test2() {
+    int n = 9;
+    int k = 4;
+    int[] a = new int[] {2, 2, 3, 4, 4, 4, 5, 5, 5};
+
+    assertEquals(6, this.yourImplementation.solve(n, k, a));
+  }
+
+  @Test
+  public void test3() {
+    int n = 15;
+    int k = 4;
+    int[] a = new int[] {2, 2, 3, 4, 5, 6, 6, 7, 7, 7, 8, 8, 9, 9, 9};
+
+    assertEquals(12, this.yourImplementation.solve(n, k, a));
+  }
+
 }
