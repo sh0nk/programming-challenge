@@ -9,7 +9,7 @@ import org.junit.Test;
 public class AnonymousSequenceSolverTest {
   private long startTime;
 
-  private IAnonymousSequenceSolver yourImplementation = new AnonymousSequenceSolverExample();
+  private IAnonymousSequenceSolver yourImplementation = new KenjiAnonymousSequenceSolver();
 
   @Before
   public void setUp() {
@@ -47,7 +47,17 @@ public class AnonymousSequenceSolverTest {
     int k = 4;
     int[] a = new int[] { 2, 2, 3, 4, 5, 6, 6, 7, 7, 7, 8, 8, 9, 9, 9 };
 
-    assertEquals(12, this.yourImplementation.solve(n, k, a));
+      assertEquals(12, this.yourImplementation.solve(n, k, a));
   }
+
+    @Test
+    public void test4() {
+        int n = 15;
+        int k = 6;
+        int[] a = new int[] { 2, 2, 3, 4, 5, 6, 6, 6, 7, 7, 8, 8, 9, 9, 9 };
+
+        assertEquals(25, this.yourImplementation.solve(n, k, a));
+    }
+
 
 }
