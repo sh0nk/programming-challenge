@@ -38,4 +38,20 @@ public class SquareDestroyerSolverTest {
         assertEquals(3, this.yourImplementation.solve(n, excludes));
     }
 
+    @Test
+    public void test3() {
+        int n = 2;
+        int[] excludes = new int[] {5, 7, 10, 12};
+
+        assertEquals(1, this.yourImplementation.solve(n, excludes));
+    }
+
+    @Test
+    public void test4() {
+        int n = 3;
+        int[] excludes = new int[] {14, 17, 20, 21, 23, 24};
+
+        assertEquals(4, this.yourImplementation.solve(n, excludes));
+    }
+
 }
