@@ -8,14 +8,27 @@ public class NoripiSquareDestroyerSolver implements ISquareDestroyerSolver {
     SquareBox squareBox = new SquareBox(n, excludes);
 
     try {
-      return this.breadthFirstSearch(squareBox, 0);
+      return this.breadthFirstSearch(squareBox);
     } catch (CloneNotSupportedException e) {
       return 0;
     }
   }
 
-  private int breadthFirstSearch(SquareBox squareBox, int depth) throws CloneNotSupportedException {
-    int currentCount = squareBox.countSquares();
+  private int breadthFirstSearch(SquareBox squareBox) throws CloneNotSupportedException {
+    List<SquareBox> squareBoxList = new ArrayList<>();
+    squareBoxList.add(squareBox);
+
+    return this.breadthFirstSearch(squareBoxList, 0);
+  }
+
+  private int breadthFirstSearch(List<SquareBox> squareBoxList, int depth)
+      throws CloneNotSupportedException {
+    // 一番数が小さくなってるやつを調べる
+    int currentCount = Integer.MAX_VALUE;
+    for (SquareBox squareBox : squareBoxList) {
+      currentCount = Math.min(currentCount, squareBox.countSquares());
+    }
+
     if (currentCount == 0) {
       return depth;
     }
@@ -23,35 +36,31 @@ public class NoripiSquareDestroyerSolver implements ISquareDestroyerSolver {
     int minCount = currentCount;
     List<SquareBox> boxList = new ArrayList<>();
 
-    for (int i = 0; i < squareBox.getDataSize(); i++) {
-      if (!squareBox.getDataAt(i)) {
-        continue;
+    for (SquareBox squareBox : squareBoxList) {
+      for (int i = 0; i < squareBox.getDataSize(); i++) {
+        if (!squareBox.getDataAt(i)) {
+          continue;
+        }
+
+        SquareBox clone = (SquareBox) squareBox.clone();
+        clone.removeSideAt(i);
+
+        // 辺を削れば最低1個は削れるはずなので減らなかったらskip
+        int newCount = clone.countSquares();
+        if (newCount == currentCount) {
+          continue;
+        }
+
+        // いままでで一番小さくなったらリストを初期化
+        if (newCount < minCount) {
+          minCount = newCount;
+          boxList = new ArrayList<>();
+        }
+
+        boxList.add(clone);
       }
-
-      SquareBox clone = (SquareBox) squareBox.clone();
-      clone.removeSideAt(i);
-
-      // 辺を削れば最低1個は削れるはずなので減らなかったらskip
-      int newCount = clone.countSquares();
-      if (newCount == currentCount) {
-        continue;
-      }
-
-      // いままでで一番小さくなったらリストを初期化
-      if (newCount < minCount) {
-        minCount = newCount;
-        boxList = new ArrayList<>();
-      }
-
-      boxList.add(clone);
     }
 
-    // 残ったやつの中からdepthが一番小さいものを求める
-    int minDepth = Integer.MAX_VALUE;
-    for (int i = 0; i < boxList.size(); i++) {
-      minDepth = Math.min(minDepth, this.breadthFirstSearch(boxList.get(i), depth + 1));
-    }
-
-    return minDepth;
+    return this.breadthFirstSearch(boxList, depth + 1);
   }
 }
