@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class NoripiSquareDestroyerSolver implements ISquareDestroyerSolver {
 
   @Override
@@ -5,19 +8,21 @@ public class NoripiSquareDestroyerSolver implements ISquareDestroyerSolver {
     SquareBox squareBox = new SquareBox(n, excludes);
 
     try {
-      return this.depthFirstSearch(squareBox, 0);
+      return this.breadthFirstSearch(squareBox, 0);
     } catch (CloneNotSupportedException e) {
       return 0;
     }
   }
 
-  private int depthFirstSearch(SquareBox squareBox, int depth) throws CloneNotSupportedException {
+  private int breadthFirstSearch(SquareBox squareBox, int depth) throws CloneNotSupportedException {
     int currentCount = squareBox.countSquares();
     if (currentCount == 0) {
       return depth;
     }
 
-    int minDepth = Integer.MAX_VALUE;
+    int minCount = currentCount;
+    List<SquareBox> boxList = new ArrayList<>();
+
     for (int i = 0; i < squareBox.getDataSize(); i++) {
       if (!squareBox.getDataAt(i)) {
         continue;
@@ -27,11 +32,24 @@ public class NoripiSquareDestroyerSolver implements ISquareDestroyerSolver {
       clone.removeSideAt(i);
 
       // 辺を削れば最低1個は削れるはずなので減らなかったらskip
-      if (clone.countSquares() == currentCount) {
+      int newCount = clone.countSquares();
+      if (newCount == currentCount) {
         continue;
       }
 
-      minDepth = Math.min(this.depthFirstSearch(clone, depth + 1), minDepth);
+      // いままでで一番小さくなったらリストを初期化
+      if (newCount < minCount) {
+        minCount = newCount;
+        boxList = new ArrayList<>();
+      }
+
+      boxList.add(clone);
+    }
+
+    // 残ったやつの中からdepthが一番小さいものを求める
+    int minDepth = Integer.MAX_VALUE;
+    for (int i = 0; i < boxList.size(); i++) {
+      minDepth = Math.min(minDepth, this.breadthFirstSearch(boxList.get(i), depth + 1));
     }
 
     return minDepth;
