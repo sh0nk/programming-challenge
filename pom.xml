@@ -26,7 +26,9 @@
         <module>4-2-CoinGame1</module>
         <module>4-2-CuttingGame</module>
         <module>4-3-GraphMaster</module>
-    <module>4-4-KAnonymousSequence</module>
+        <module>4-4-KAnonymousSequence</module>
+        <module>4-5-Sudoku</module>
+        <module>4-5-2-SquareDestroyer</module>
   </modules>
 
     <dependencies>
