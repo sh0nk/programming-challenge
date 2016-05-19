@@ -29,7 +29,8 @@
         <module>4-4-KAnonymousSequence</module>
         <module>4-5-Sudoku</module>
         <module>4-5-2-SquareDestroyer</module>
-  </modules>
+        <module>2-7-GCJ-03</module>
+    </modules>
 
     <dependencies>
         <dependency>
