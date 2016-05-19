@@ -25,7 +25,7 @@ public class BribePrisonerTest {
 
   private long startTime;
 
-  private IBribePrisoner yourImplementation = new SampleBribePrisoner()
+  private IBribePrisoner yourImplementation = new SampleBribePrisoner();
 
   @Before
   public void setUp() {
