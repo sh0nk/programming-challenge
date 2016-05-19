@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class Sh0nkBribePrisoner implements IBribePrisoner {
@@ -35,15 +36,11 @@ public class Sh0nkBribePrisoner implements IBribePrisoner {
 
         int totalCost = 0;
         while (true) {
-            Range maxChunk = null;
-            for (Range chunk : chunks) {
-                if (maxChunk == null) {
-                    maxChunk = chunk;
-                }
-                if (chunk.size() > maxChunk.size()) {
-                    maxChunk = chunk;
-                }
+            Optional<Range> maxChunkCan = chunks.stream().reduce((i, t) -> i == null ? t : (i.size() < t.size() ? t : i));
+            if (!maxChunkCan.isPresent()) {
+                return totalCost;
             }
+            Range maxChunk = maxChunkCan.get();
             chunks.remove(maxChunk);
             System.out.println(String.format("chunk: start %d end %d", maxChunk.start, maxChunk.end));
 
@@ -70,10 +67,10 @@ public class Sh0nkBribePrisoner implements IBribePrisoner {
             divider.remove(new Integer(index));
             System.out.println(String.format("  divider: %d", index));
 
+            // 割れた
             Range lowChunk = new Range(maxChunk.start, index - 1);
             Range highChunk = new Range(index + 1, maxChunk.end);
-            totalCost += lowChunk.size();
-            totalCost += highChunk.size();
+            totalCost += lowChunk.size() + highChunk.size();
             System.out.println(String.format("  total: %d", totalCost));
             if (divider.size() == 0) {
                 break;
