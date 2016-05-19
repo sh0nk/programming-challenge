@@ -28,5 +28,5 @@
  */
 public interface IBribePrisoner {
 
-  public int answer(int P, int Q);
+  public int answer(int P, int Q, int[] A);
 }

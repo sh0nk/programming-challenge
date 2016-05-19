@@ -18,7 +18,7 @@
 public class SampleBribePrisoner implements IBribePrisoner {
 
   @Override
-  public int answer(int P, int Q) {
+  public int answer(int P, int Q, int[] A) {
     switch (P << 10 + Q) {
       case 8 << 10 + 1:
         return 7;

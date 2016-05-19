@@ -41,11 +41,11 @@ public class BribePrisonerTest {
 
   @Test
   public void test1() {
-    assertEquals(7, this.yourImplementation.answer(8, 1));
+    assertEquals(7, this.yourImplementation.answer(8, 1, new int[]{3}));
   }
 
   @Test
   public void test2() {
-    assertEquals(35, this.yourImplementation.answer(20, 3));
+    assertEquals(35, this.yourImplementation.answer(20, 3, new int[]{3, 6, 14}));
   }
 }
