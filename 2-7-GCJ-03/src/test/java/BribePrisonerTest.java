@@ -48,4 +48,14 @@ public class BribePrisonerTest {
   public void test2() {
     assertEquals(35, this.yourImplementation.answer(20, 3, new int[]{3, 6, 14}));
   }
+
+  @Test
+  public void test3() {
+    assertEquals(102, this.yourImplementation.answer(50, 4, new int[]{3, 8, 23, 40}));
+  }
+
+  @Test
+  public void test4() {
+    assertEquals(241, this.yourImplementation.answer(100, 5, new int[]{13, 20, 48, 56, 77}));
+  }
 }
