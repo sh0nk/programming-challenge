@@ -25,7 +25,7 @@ public class BribePrisonerTest {
 
   private long startTime;
 
-  private IBribePrisoner yourImplementation = new SampleBribePrisoner();
+  private IBribePrisoner yourImplementation = new NoripiBribePrisoner();
 
   @Before
   public void setUp() {
@@ -57,6 +57,12 @@ public class BribePrisonerTest {
   @Test
   public void test4() {
     assertEquals(241, this.yourImplementation.answer(100, 5, new int[]{13, 20, 48, 56, 77}));
+  }
+
+  @Test
+  public void test4_1() {
+    assertEquals(1119, this.yourImplementation
+        .answer(300, 13, new int[]{13, 20, 48, 56, 77, 106, 129, 150, 190, 211, 233, 254, 289}));
   }
 
   @Test
