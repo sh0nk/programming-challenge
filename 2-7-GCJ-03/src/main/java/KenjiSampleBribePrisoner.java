@@ -22,71 +22,70 @@ public class KenjiSampleBribePrisoner implements IBribePrisoner {
   public int answer(int P, int Q, int[] A) {
 
     System.out.println("---------------------");
-    System.out.println(P);
-    System.out.println(Q);
+    System.out.println("P: " + P);
+    System.out.println("Q: " + Q);
     System.out.println(Arrays.toString(A));
     System.out.println("---------------------");
-    int sum_cut = cut(P, A, 0);
+
+    for (int i = 0; i < A.length; i++) {
+      // A[i] = A[i] - 1;
+    }
+
+    int sum_cut = cut(1, P, 0, Q - 1, A);
 
     System.out.println(sum_cut);
 
     return sum_cut;
   }
 
-  public int cut(int P, int[] A, int sum_money) {
+  public int cut(int roomStart, int roomEnd, int prisonerStart, int prisonerEnd, int[] A) {
 
-    int ret = 0;
+    System.out.println("-------------");
+    System.out.println("roomStart: " + roomStart);
+    System.out.println("roomEnd: " + roomEnd);
+    System.out.println("prisonerStart: " + prisonerStart);
+    System.out.println("prisonerEnd: " + prisonerEnd);
 
-    int left_cut = 0;
-    for (int i = 0; i < P; i++) {
-      int left = i + 1;
-      if (A[0] == left) {
-        break;
+    int min_cost = Integer.MAX_VALUE;
+    int min_left = Integer.MAX_VALUE;
+    int min_right = Integer.MAX_VALUE;
+    int minPrisoner = -1;
+    int minRoom = -1;
+    for (int i = prisonerStart; i <= prisonerEnd; i++) {
+      int left = A[i] - 1;
+      int right = roomEnd - A[i];
+      int min = Math.abs(right - left);
+      System.out.println(left + "," + right + ": " + min);
+      if (min < min_cost) {
+        minPrisoner = i;
+        minRoom = A[minPrisoner];
+        min_cost = min;
+        min_left = left;
+        min_right = right;
       }
-      left_cut++;
     }
 
-    int right_cut = 0;
-    for (int i = 0; i < P; i++) {
-      int right = P - i;
-      if (A[A.length - 1] == right) {
-        break;
-      }
-      right_cut++;
+    if (minPrisoner == -1) {
+      return 0;
     }
 
-    int[] tmp = new int[A.length - 1];
-    int cut = 0;
+    int money_left = minRoom - roomStart;
+    int money_right = roomEnd - minRoom;
 
-    if (left_cut > right_cut) {
-      for (int i = 0; i < A.length - 1; i++) {
-        tmp[i] = A[i + 1] - left_cut;
-      }
-      cut = left_cut;
-    } else {
-      for (int i = 0; i < A.length - 1; i++) {
-        tmp[i] = A[i];
-      }
-      cut = right_cut;
-    }
-    A = tmp;
+    System.out.println("minPrisoner: " + minPrisoner);
+    System.out.println("minRoom: " + minRoom);
+    System.out.println("min_cost: " + min_cost);
+    System.out.println("money_left: " + (minRoom - roomStart));
+    System.out.println("money_right: " + (roomEnd - minRoom));
 
-    System.out.println("P:" + P);
-    System.out.println("P-cut-1:" + (P - cut - 1));
-    System.out.println("length: " + A.length);
-    System.out.println("left: " + left_cut);
-    System.out.println("right: " + right_cut);
-    System.out.println("sum: " + sum_money);
-    System.out.println(Arrays.toString(A));
-    System.out.println("---------------------");
+    int left_cost = money_left + cut(roomStart, minRoom - 1, prisonerStart, minPrisoner - 1, A);
+    System.out.println("left: " + left_cost);
+    
+    int right_cost = money_right + cut(minRoom + 1, roomEnd, minPrisoner + 1, prisonerEnd, A);
+    System.out.println("right: " + right_cost);
 
-    if (A.length == 0) {
-      return sum_money + P - 1;
-    } else {
-      ret = cut(P - cut - 1, A, sum_money + P - 1);
-    }
 
-    return ret;
+    return left_cost + right_cost;
   }
 
 }
