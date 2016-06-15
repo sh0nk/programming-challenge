@@ -15,6 +15,7 @@
         <module>2-6-Integer</module>
         <module>2-7-GCJ-01</module>
         <module>2-7-GCJ-02</module>
+        <module>2-7-GCJ-03</module>
         <module>3-1-BinarySearch</module>
         <module>3-1-AggressiveCows</module>
         <module>3-2</module>
@@ -30,7 +31,7 @@
         <module>4-4-KAnonymousSequence</module>
         <module>4-5-Sudoku</module>
         <module>4-5-2-SquareDestroyer</module>
-        <module>2-7-GCJ-03</module>
+        <module>4-6-ClosestPair</module>
     </modules>
 
     <dependencies>
