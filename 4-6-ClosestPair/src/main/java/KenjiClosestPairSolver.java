@@ -20,16 +20,18 @@ public class KenjiClosestPairSolver implements IClosestPairSolver {
 
   double closestPair(List<Pair> pairs, int n) {
     if (n <= 1) {
-      return Integer.MAX_VALUE;
+      return Double.POSITIVE_INFINITY;
     }
     int m = n / 2;
     System.out.println(pairs);
     System.out.println("m: " + m);
     System.out.println("n: " + n);
-    double x = pairs.get(m - 1).x;
+    double x = pairs.get(m).x;
     List<Pair> left = pairs.subList(0, m);
     List<Pair> right = pairs.subList(m, n);
-    double d = Math.min(closestPair(left, m), closestPair(right, m));
+    System.out.println(left);
+    System.out.println(right);
+    double d = Math.min(closestPair(left, m), closestPair(right, n - m));
     System.out.println("d: " + d);
 
     List<Pair> a = pairs.subList(0, n);
@@ -61,6 +63,7 @@ public class KenjiClosestPairSolver implements IClosestPairSolver {
     }
 
     System.out.println(a);
+    System.out.println();
 
     return d;
   }
