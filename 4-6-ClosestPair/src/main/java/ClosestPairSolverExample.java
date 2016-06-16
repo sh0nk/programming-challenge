@@ -9,7 +9,7 @@ import java.util.List;
 
 public class ClosestPairSolverExample implements IClosestPairSolver {
     private static Logger logger = LogManager.getLogger(ClosestPairSolverExample.class);
-    
+
     public double solve(int n, double[] X, double[] Y) {
         Point2D.Double A[] = new Point2D.Double[n];
         for (int i = 0; i < X.length; i++) {
@@ -29,9 +29,6 @@ public class ClosestPairSolverExample implements IClosestPairSolver {
                 }
             }
         });
-        Arrays.stream(A).forEach(a -> {
-            logger.info("x, y : ({}, {})", a.getX(), a.getY());
-        });
 
         double ans = closest_pair(A, n);
         return ans;
@@ -43,7 +40,6 @@ public class ClosestPairSolverExample implements IClosestPairSolver {
      * @return
      */
     private double closest_pair(Point2D.Double[] a, int n) {
-        logger.info("n count : {}", n);
         if (n <= 1) return Double.POSITIVE_INFINITY;
         int m = n / 2;
         double x = a[m].getX();
