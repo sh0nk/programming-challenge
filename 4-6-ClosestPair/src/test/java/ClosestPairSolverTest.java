@@ -6,7 +6,7 @@ import org.junit.Test;
 public class ClosestPairSolverTest {
     private long startTime;
     private IClosestPairSolver yourImplementation = new ClosestPairSolverExample();
-    private static final double DELTA = 1e-15;
+    private static final double DELTA = 1e-4;
 
     @Before
     public void setUp() {
