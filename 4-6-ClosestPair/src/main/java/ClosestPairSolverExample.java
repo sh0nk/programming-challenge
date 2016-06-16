@@ -9,8 +9,7 @@ import java.util.List;
 
 public class ClosestPairSolverExample implements IClosestPairSolver {
     private static Logger logger = LogManager.getLogger(ClosestPairSolverExample.class);
-
-    //TODO sorry , this is not correct.
+    
     public double solve(int n, double[] X, double[] Y) {
         Point2D.Double A[] = new Point2D.Double[n];
         for (int i = 0; i < X.length; i++) {
@@ -21,7 +20,13 @@ public class ClosestPairSolverExample implements IClosestPairSolver {
         Arrays.sort(A, new Comparator<Point2D.Double>() {
             @Override
             public int compare(Point2D.Double o1, Point2D.Double o2) {
-                return (int)(o1.getX() - o2.getX());
+                if (o1.getX() > o2.getX()) {
+                    return 1;
+                } else if (o1.getX() < o2.getX()) {
+                    return -1;
+                } else {
+                    return 0;
+                }
             }
         });
         Arrays.stream(A).forEach(a -> {
@@ -38,12 +43,12 @@ public class ClosestPairSolverExample implements IClosestPairSolver {
      * @return
      */
     private double closest_pair(Point2D.Double[] a, int n) {
-        //logger.info("n count : {}", n);
+        logger.info("n count : {}", n);
         if (n <= 1) return Double.POSITIVE_INFINITY;
         int m = n / 2;
         double x = a[m].getX();
         Point2D.Double[] a1 = Arrays.copyOfRange(a, 0, m);
-        Point2D.Double[] a2 = Arrays.copyOfRange(a, m, n - m);
+        Point2D.Double[] a2 = Arrays.copyOfRange(a, m, n);
 
         double d = Math.min(closest_pair(a1, m), closest_pair(a2, n - m));
 
@@ -51,7 +56,13 @@ public class ClosestPairSolverExample implements IClosestPairSolver {
         Arrays.sort(a, new Comparator<Point2D.Double>() {
             @Override
             public int compare(Point2D.Double o1, Point2D.Double o2) {
-                return (int)(o1.getY() - o2.getY());
+                if (o1.getY() > o2.getY()) {
+                    return 1;
+                } else if (o1.getY() < o2.getY()) {
+                    return -1;
+                } else {
+                    return 0;
+                }
             }
         });
 
