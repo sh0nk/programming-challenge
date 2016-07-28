@@ -32,6 +32,7 @@
         <module>4-5-Sudoku</module>
         <module>4-5-2-SquareDestroyer</module>
         <module>4-6-ClosestPair</module>
+        <module>4-7-1-DNA_Repair</module>
     </modules>
 
     <dependencies>
